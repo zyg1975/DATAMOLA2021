@@ -59,12 +59,13 @@ as
                left join dw_streets_data street on (source_cl.street_name = street.street_name and region.region_id = street.region_id and city.city_id = street.city_id)
                left join dw_houses_data  house  on (source_cl.house_no    = house.house_no     and region.region_id = house.region_id  and city.city_id = house.city_id  and street.street_id = house.street_id)
 
-               left join dw_gen_geo_data geo on (house.house_id   = geo.house_id  and
-                                                 street.street_id = geo.street_id and
-                                                 city.city_id     = geo.city_id   and
-                                                 region.region_id = geo.region_id and
-                                                 payer.payer_id   = geo.payer_id)
-
+               left join (select distinct geo_id, house_id, street_id, city_id, region_id, payer_id from dw_gen_geo_data) geo
+                                                on (house.house_id   = geo.house_id  and
+                                                    street.street_id = geo.street_id and
+                                                    city.city_id     = geo.city_id   and
+                                                    region.region_id = geo.region_id and
+                                                    payer.payer_id   = geo.payer_id)
+                                  
                left join dw_payments_data stage on (paysystem.paysystem_id           = stage.paysystem_id      and
                                                     provider.provider_id             = stage.provider_id       and
                                                     services.service_id              = stage.service_id        and
