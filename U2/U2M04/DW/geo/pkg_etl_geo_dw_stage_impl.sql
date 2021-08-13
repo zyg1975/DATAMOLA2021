@@ -38,7 +38,9 @@ as
                                                 and street.street_id = stage.street_id
                                                 and city.city_id     = stage.city_id
                                                 and region.region_id = stage.region_id
-                                                and payer.payer_id   = stage.payer_id);
+                                                and payer.payer_id   = stage.payer_id
+                                                and '1'              = stage.is_active
+                                                   );
    
        fetch geo bulk collect into house_id, street_id, city_id, region_id, payer_id, geo_id;
     

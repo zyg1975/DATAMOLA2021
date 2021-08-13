@@ -8,7 +8,7 @@ as
      type cursor_sum    is table of number(10,2);
 
      type big_cursor is ref cursor;
-     
+
      payment_id        cursor_number;
      paysystem_id      cursor_number;
      provider_id       cursor_number;
@@ -59,13 +59,13 @@ as
                left join dw_streets_data street on (source_cl.street_name = street.street_name and region.region_id = street.region_id and city.city_id = street.city_id)
                left join dw_houses_data  house  on (source_cl.house_no    = house.house_no     and region.region_id = house.region_id  and city.city_id = house.city_id  and street.street_id = house.street_id)
 
-               left join (select distinct geo_id, house_id, street_id, city_id, region_id, payer_id from dw_gen_geo_data) geo
+               left join (select distinct geo_id, house_id, street_id, city_id, region_id, payer_id from dw_gen_geo_data where '1' = is_active) geo
                                                 on (house.house_id   = geo.house_id  and
                                                     street.street_id = geo.street_id and
                                                     city.city_id     = geo.city_id   and
                                                     region.region_id = geo.region_id and
                                                     payer.payer_id   = geo.payer_id)
-                                  
+
                left join dw_payments_data stage on (paysystem.paysystem_id           = stage.paysystem_id      and
                                                     provider.provider_id             = stage.provider_id       and
                                                     services.service_id              = stage.service_id        and
@@ -73,7 +73,7 @@ as
                                                     geo.geo_id                       = stage.geo_id            and
                                                     source_cl.date_issue_dt          = stage.date_issue_dt
                                                     );
-   
+
        fetch payments bulk collect into paysystem_id          
                                       , provider_id            
                                       , service_id              
@@ -85,9 +85,9 @@ as
                                       , sum_pay      
                                       , payment_id
                                       ;
-    
+
        close payments;
-    
+
        for i in payment_id.first .. payment_id.last loop
          if ( payment_id (i) is null ) then
            insert into dw_payments_data(payment_id,
@@ -114,7 +114,7 @@ as
                         sum_pay(i),
                         sysdate,
                         null);
-  
+
            commit;
          else
            update dw_payments_data
@@ -123,7 +123,7 @@ as
                , sum_pay     = sum_pay    (i)
                , update_dt   = sysdate
              where dw_payments_data.paysystem_id = paysystem_id(i);
-   
+
            commit;
          end if;
        end loop;
