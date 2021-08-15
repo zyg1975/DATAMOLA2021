@@ -1,0 +1,12 @@
+BEGIN
+  pkg_etl_paysystems_dim.load_paysystems_dim;
+  pkg_etl_providers_dim.load_providers_dim;
+  pkg_etl_payers_dim.load_payers_dim;
+  pkg_etl_service_objects_dim.load_service_objects_dim;
+  pkg_etl_services_dim.load_services_dim;
+  pkg_etl_regions_dim.load_regions_dim;
+  pkg_etl_cityes_dim.load_cityes_dim;
+  pkg_etl_streets_dim.load_streets_dim;
+  pkg_etl_houses_dim.load_houses_dim;
+  pkg_etl_geo_dim.load_geo_dim;
+END;
