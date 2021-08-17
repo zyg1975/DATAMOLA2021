@@ -155,25 +155,3 @@ create table dim_geo
   constraint geo_id_pk primary key ( geo_id ) enable
 )
 ;
-
-grant select on dw_data_zkh.dw_payments_data to yzhdanovich;
-/*==============================================================*/
-/* table: dw_payments_data                                        */
-/*==============================================================*/
-create table fct_payments
-(
-  payment_id        number(10) not null,
-  paysystem_id      number(10) not null,
-  provider_id       number(10) not null,
-  service_id        number(10) not null,
-  service_object_id number(10) not null,
-  geo_id            number(10) not null,
-  date_issue_dt     date                 not null,
-  date_pay_dt       date                 not null,
-  sum_issue         number(10,2) not null,
-  sum_pay           number(10,2),
-  insert_dt         date not null,
-  update_dt         date,
-  constraint payment_id_pk primary key ( payment_id ) enable
-)
-;
