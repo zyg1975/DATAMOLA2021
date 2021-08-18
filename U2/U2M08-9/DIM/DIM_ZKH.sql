@@ -155,3 +155,26 @@ create table dim_geo
   constraint geo_id_pk primary key ( geo_id ) enable
 )
 ;
+
+grant select on dw_data_zkh.dw_gen_geo_hist to yzhdanovich;
+/*==============================================================*/
+/* table: dim_geo_hist                                          */
+/*==============================================================*/
+create table dim_geo_hist
+(
+  geo_surr_id number(10) not null,
+  geo_id      number(10) not null,
+  house_id    number(10) not null,
+  street_id   number(10) not null,
+  city_id     number(10) not null,
+  region_id   number(10) not null,
+  payer_id    number(10) not null,
+  is_active   char(1 byte) default '1', 
+  valid_from  date not null enable, 
+  valid_to    date, 
+  insert_dt   date not null enable, 
+  update_dt   date, 
+  check (is_active in ('0','1')) enable, 
+  constraint pk_dw_gen_geo_hist primary key (geo_id, valid_from)
+)
+;
