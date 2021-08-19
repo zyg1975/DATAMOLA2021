@@ -1,0 +1,13 @@
+BEGIN
+  pkg_etl_regions_dw_stage.load_regions_dw;
+  pkg_etl_cityes_dw_stage.load_cityes_dw;
+  pkg_etl_streets_dw_stage.load_streets_dw;
+  pkg_etl_houses_dw_stage.load_houses_dw;
+  pkg_etl_payers_dw_stage.load_payers_dw;
+  pkg_etl_paysystems_dw_stage.load_paysystems_dw;
+  pkg_etl_service_objects_dw_stage.load_service_objects_dw;
+  pkg_etl_providers_dw_stage.load_providers_dw;
+  pkg_etl_services_dw_stage.load_services_dw;
+  pkg_etl_geo_dw_stage.load_geo_dw;
+  pkg_etl_payments_dw_stage.load_payments_dw;
+END;

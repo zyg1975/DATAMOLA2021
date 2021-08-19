@@ -1,0 +1,12 @@
+BEGIN
+  pkg_etl_regions_cl.load_clean_regions;
+  pkg_etl_cityes_cl.load_clean_cityes;
+  pkg_etl_streets_cl.load_clean_streets;
+  pkg_etl_houses_cl.load_clean_houses;
+  pkg_etl_payers_cl.load_clean_payers;
+  pkg_etl_paysystems_cl.load_clean_paysystems;
+  pkg_etl_service_objects_cl.load_clean_service_objects;
+  pkg_etl_providers_cl.load_clean_providers;
+  pkg_etl_services_cl.load_clean_services;
+  pkg_etl_payments_cl.load_clean_payments;
+END;
