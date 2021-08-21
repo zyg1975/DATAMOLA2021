@@ -29,6 +29,7 @@ partition by range(date_issue_dt)
   partition pays_2020 values less than(TO_DATE('01.01.2021','dd.mm.yyyy')),
   partition pays_2021 values less than(TO_DATE('01.01.2022','dd.mm.yyyy'))
 )
+tablespace TS_DW_DATA_ZKH
 ;
 
 /*==============================================================*/
@@ -60,4 +61,5 @@ PARTITION BY RANGE(date_issue_dt)
   partition pays_2020 values less than(TO_DATE('01.01.2021','dd.mm.yyyy')),
   partition pays_2021 values less than(TO_DATE('01.01.2022','dd.mm.yyyy'))
 )
+tablespace TS_DW_DATA_ZKH
 ;
